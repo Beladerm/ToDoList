@@ -1,13 +1,11 @@
 package ru.ms.stu.todolist_va
 
 import Database
-import android.content.Context
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import ru.ms.stu.todolist_va.databinding.ActivityMainBinding
 import ru.ms.stu.todolist_va.databinding.NoteItemBinding
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,15 +32,21 @@ class MainActivity : AppCompatActivity() {
                 binding.linearLayout,
                 false
             )
-            noteItemBinding.textViewNote.text = note.text
-            noteItemBinding.textViewNote.setBackgroundColor(
-                when (note.priority) {
-                    0 -> Color.GREEN
-                    1 -> Color.rgb(255, 162, 0) // ORANGE
-                    else -> Color.RED // else == 2
+            noteItemBinding.apply {
+                textViewNote.setOnClickListener{
+                    database.remove(note)
+                    showNotes()
                 }
-            )
-            binding.linearLayout.addView(noteItemBinding.root)
+                textViewNote.text = note.text
+                textViewNote.setBackgroundColor(
+                    when (note.priority) {
+                        0 -> Color.GREEN
+                        1 -> Color.rgb(255, 162, 0) // ORANGE
+                        else -> Color.RED // else == 2
+                    }
+                )
+                binding.linearLayout.addView(noteItemBinding.root)
+            }
         }
     }
 

@@ -6,23 +6,20 @@ class Database private constructor() {
     val notes: List<Note>
         get() = _notes
 
-//    init {
-//        for (i in 0 until 20) {
-//            _notes.add(Note(i, "Note $i", Random.nextInt(3)))
-//        }
-//    }
+    init {
+        for (i in 0 until 20) {
+            _notes.add(Note(i, "Note $i", Random.nextInt(3)))
+        }
+    }
 
     fun add(note: Note) {
         _notes.add(note)
     }
 
-    fun remove(id:Int) {
-        for (i in _notes.indices) {
-            if (_notes[i].id == id) {
-                _notes.remove(_notes[i])
-            }
-        }
+    fun remove(note: Note) {
+        _notes.removeAll { it.id == note.id }
     }
+
 
     companion object {
         private val instance = Database()
