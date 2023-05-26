@@ -18,6 +18,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerViewNotes.layoutManager = LinearLayoutManager(this)
         notesAdapter = NotesAdapter()
+        notesAdapter.setOnNoteClickListener(object : NotesAdapter.OnNoteClickListener {
+            override fun onNoteClick(note: Note) {
+                database.remove(note.id)
+                showNotes()
+            }
+        })
+
         binding.recyclerViewNotes.adapter = notesAdapter
 
         addNote()

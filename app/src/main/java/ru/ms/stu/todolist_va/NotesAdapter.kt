@@ -9,6 +9,7 @@ import ru.ms.stu.todolist_va.databinding.NoteItemBinding
 class NotesAdapter() : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private var _notes = mutableListOf<Note>()
+    private var onNoteClickListener: OnNoteClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,7 +21,7 @@ class NotesAdapter() : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
         val note = _notes[position]
         holder.bind(note)
         holder.itemView.setOnClickListener {
-            
+            onNoteClickListener?.onNoteClick(note)
         }
     }
 
@@ -32,6 +33,10 @@ class NotesAdapter() : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
         _notes.clear()
         _notes.addAll(notes)
         notifyDataSetChanged()
+    }
+
+    fun setOnNoteClickListener(onNoteClickListener: OnNoteClickListener) {
+        this.onNoteClickListener = onNoteClickListener
     }
 
 
@@ -49,6 +54,10 @@ class NotesAdapter() : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
                 )
             }
         }
+    }
+
+    interface OnNoteClickListener {
+        fun onNoteClick(note: Note)
     }
 
 }
