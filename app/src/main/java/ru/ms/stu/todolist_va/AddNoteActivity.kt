@@ -11,11 +11,14 @@ import ru.ms.stu.todolist_va.databinding.ActivityAddNoteBinding
 class AddNoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddNoteBinding
-    private val database = Database.getInstance()
+    //private val database = Database.getInstance()
+    private var noteDatabase : NoteDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddNoteBinding.inflate(layoutInflater).also { setContentView(it.root) }
+
+        noteDatabase = NoteDatabase.getInstance(application)
 
         saveNote()
     }
@@ -32,8 +35,7 @@ class AddNoteActivity : AppCompatActivity() {
                 } else {
                     val text = label.text.toString().trim()
                     val priority = getPriority()
-                    val id = database.notes.size
-                    database.add( Note(id,text,priority))
+                    noteDatabase?.notesDao()?.addNote( Note(text,priority))
                     finish()
                 }
             }
