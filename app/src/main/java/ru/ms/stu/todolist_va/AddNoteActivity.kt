@@ -43,11 +43,11 @@ class AddNoteActivity : AppCompatActivity() {
     private fun getPriority(): Int {
         var priority: Int
         with(binding) {
-            if(checkboxLow.isChecked) {
-                priority = 0
+            priority = if(checkboxLow.isChecked) {
+                0
             } else if (checkboxMedium.isChecked) {
-                priority = 1
-            } else priority = 2
+                1
+            } else 2
 
         }
         return priority
