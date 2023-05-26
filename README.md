@@ -39,5 +39,5 @@
 
 **XML-разметка** и программирование пользовательского интерфейса: В проекте использована XML-разметка для описания макета пользовательского интерфейса, а также программирование на Kotlin для обработки событий и взаимодействия с компонентами пользовательского интерфейса.
 
- `![image](https://github.com/Beladerm/ToDoList/assets/90094274/33b1410c-0bb4-4001-9b64-8bcd5069c974) `
- `![image](https://github.com/Beladerm/ToDoList/assets/90094274/571fbd85-8434-40f5-899d-801fcee2f25d) `
+ ![image](https://github.com/Beladerm/ToDoList/assets/90094274/33b1410c-0bb4-4001-9b64-8bcd5069c974) 
+ ![image](https://github.com/Beladerm/ToDoList/assets/90094274/571fbd85-8434-40f5-899d-801fcee2f25d) 
