@@ -1,8 +1,8 @@
 package ru.ms.stu.todolist_va
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 
@@ -10,7 +10,7 @@ import androidx.room.Query
 interface NotesDao {
 
     @Query("SELECT * FROM notes")
-    fun getNotes(): List<Note>
+    fun getNotes(): LiveData<List<Note>>
 
     @Insert
     fun addNote(note: Note)

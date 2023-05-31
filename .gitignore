@@ -14,3 +14,19 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+
+# Android
+*.apk
+*.ap_
+*.dex
+*.obb
+*.so
+*.aar
+
+# Gradle
+.gradle/
+/build/
+
+# IntelliJ IDEA / Android Studio
+.idea
