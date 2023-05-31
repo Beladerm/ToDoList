@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-
 @Database(entities = [Note::class], version = 1)
 abstract class NoteDatabase: RoomDatabase() {
 
@@ -13,7 +12,7 @@ abstract class NoteDatabase: RoomDatabase() {
         private var instance: NoteDatabase? = null
         private const val DB_NAME = "notes.db"
 
-        fun getInstance(context: Context): NoteDatabase? {
+        fun getInstance(context: Context): NoteDatabase {
             if (instance == null) {
                 instance = Room.databaseBuilder(
                     context.applicationContext,
