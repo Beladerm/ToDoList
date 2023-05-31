@@ -1,8 +1,10 @@
 package ru.ms.stu.todolist_va
 
 import android.os.Bundle
-import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,31 +14,33 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var notesAdapter: NotesAdapter
+    private lateinit var noteLiveData: LiveData<List<Note>>
 
     private var noteDatabase : NoteDatabase? = null
-    private val handler = android.os.Handler(Looper.getMainLooper())
+    private val notesObserver = Observer<List<Note>> {
+        notes -> notes?.let { notesAdapter.setNotes(it)}
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
 
         noteDatabase = NoteDatabase.getInstance(application)
+        val noteDao = noteDatabase?.notesDao()
+        noteLiveData = noteDao?.getNotes() ?: MutableLiveData()
 
         binding.recyclerViewNotes.layoutManager = LinearLayoutManager(this)
         notesAdapter = NotesAdapter()
+        binding.recyclerViewNotes.adapter = notesAdapter
+        noteLiveData.observe(this, notesObserver)
+
         notesAdapter.setOnNoteClickListener(object : NotesAdapter.OnNoteClickListener {
            override fun onNoteClick(note: Note) {
                Thread {
-                   kotlin.run {
                        noteDatabase?.notesDao()?.remove(note.id)
-                   }
-                   handler.post {
-                       showNotes()
-                   }
                }.start()
            }
         })
-        binding.recyclerViewNotes.adapter = notesAdapter
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             0,
@@ -54,12 +58,7 @@ class MainActivity : AppCompatActivity() {
                 val note = notesAdapter.getNotes()[position]
 
                 Thread {
-                    kotlin.run {
                         noteDatabase?.notesDao()?.remove(note.id)
-                        handler.post{
-                            showNotes()
-                        }
-                    }
                 }.start()
             }
         }
@@ -69,24 +68,6 @@ class MainActivity : AppCompatActivity() {
         addNote()
     }
 
-    override fun onResume() {
-        super.onResume()
-        showNotes()
-
-    }
-
-    private fun showNotes() {
-        Thread {
-            kotlin.run {
-                val notes = noteDatabase?.notesDao()?.getNotes()
-                handler.post{
-                    notes?.let { notesAdapter.setNotes(it) }
-                }
-
-            }
-        }.start()
-
-    }
 
     private fun addNote() {
            binding.buttonAdd.setOnClickListener{

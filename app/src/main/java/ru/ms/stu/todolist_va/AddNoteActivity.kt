@@ -38,11 +38,9 @@ class AddNoteActivity : AppCompatActivity() {
                     val text = label.text.toString().trim()
                     val priority = getPriority()
                     Thread {
-                        kotlin.run {
                             noteDatabase?.notesDao()?.addNote(Note(text, priority))
                             handler.post {
                                 finish()
-                            }
                         }
                     }.start()
                 }
