@@ -10,5 +10,10 @@
     <color name="gray">#858585</color>
     <color name="statusBarColorLight">#FF000000</color>   <!-- Dark color for light theme -->
     <color name="statusBarColorDark">#FFFFFFFF</color>    <!-- Light color for dark theme -->
+    <color name="mGreen"> #99CC33 </color>
+    <color name="mOrange"> #FF9900 </color>
+    <color name="mRed"> #CC3333 </color>
+
+
 
 </resources>
