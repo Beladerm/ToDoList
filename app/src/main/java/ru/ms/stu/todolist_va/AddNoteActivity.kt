@@ -1,18 +1,20 @@
 package ru.ms.stu.todolist_va
 
-import Database
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import ru.ms.stu.todolist_va.databinding.ActivityAddNoteBinding
 
 class AddNoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddNoteBinding
-    //private val database = Database.getInstance()
     private var noteDatabase : NoteDatabase? = null
+
+    private val handler = android.os.Handler(Looper.getMainLooper())
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +37,14 @@ class AddNoteActivity : AppCompatActivity() {
                 } else {
                     val text = label.text.toString().trim()
                     val priority = getPriority()
-                    noteDatabase?.notesDao()?.addNote( Note(text,priority))
-                    finish()
+                    Thread {
+                        kotlin.run {
+                            noteDatabase?.notesDao()?.addNote(Note(text, priority))
+                            handler.post {
+                                finish()
+                            }
+                        }
+                    }.start()
                 }
             }
         }
