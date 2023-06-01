@@ -48,7 +48,7 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(note: Note) {
-            with(binding.textViewNote ) {
+            with(binding.textViewNote) {
                 text = note.text
                 setBackgroundColor(
                     when (note.priority) {
