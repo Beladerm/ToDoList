@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDoList_v.a</string>
+    <string name="app_name">ToDoList</string>
     <string name="buttonAddDescription">adding item</string>
     <string name="entire_note">Entire note:</string>
     <string name="low">Low</string>

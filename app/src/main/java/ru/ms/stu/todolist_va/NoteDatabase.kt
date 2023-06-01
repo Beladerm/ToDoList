@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [Note::class], version = 1)
-abstract class NoteDatabase: RoomDatabase() {
+abstract class NoteDatabase : RoomDatabase() {
 
     companion object {
         private var instance: NoteDatabase? = null

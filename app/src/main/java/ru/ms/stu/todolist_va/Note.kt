@@ -11,7 +11,7 @@ class Note(
     val id: Int,
     val text: String,
     val priority: Int
-    ) {
+) {
     @Ignore
     constructor(text: String, priority: Int) : this(0, text, priority)
 }
