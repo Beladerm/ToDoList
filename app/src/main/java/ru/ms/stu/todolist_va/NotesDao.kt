@@ -12,11 +12,11 @@ import io.reactivex.rxjava3.core.Single
 interface NotesDao {
 
     @Query("SELECT * FROM notes")
-    fun getNotes(): Single<List<Note>>
+    fun getNotes(): LiveData<List<Note>>
 
     @Insert
-    fun addNote(note: Note) : Completable
+    fun addNote(note: Note)  : Completable
 
     @Query("DELETE FROM notes WHERE id = :id")
-    fun remove(id: Int) : Completable
+    fun remove(id: Int)  : Completable
 }
