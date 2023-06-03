@@ -6,9 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class AddNoteViewModel(application: Application) : AndroidViewModel(application) {
@@ -31,15 +29,18 @@ class AddNoteViewModel(application: Application) : AndroidViewModel(application)
         compositeDisposable.add(disposable)
     }
 
-//    private fun addNoteRx(note: Note): Completable {
-//        return Completable.fromAction{
-//            notesDao.addNote(note)
-//            throw Exception("test")
-//        }
-//    }
+
 
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
     }
 }
+
+
+//    private fun addNoteRx(note: Note): Completable {
+//        return Completable.fromAction{
+//            notesDao.addNote(note)
+//            throw Exception("test")
+//        }
+//    }
