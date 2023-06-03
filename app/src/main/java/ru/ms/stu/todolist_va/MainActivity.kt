@@ -73,10 +73,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel?.refresh()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel?.refresh()
+//    }
 
 
 }
